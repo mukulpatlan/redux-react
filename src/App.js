@@ -1,21 +1,28 @@
 import { useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
-import Counter from './components/Counter';
-
-import Header from './components/Header';
-import Auth from './components/Auth';
-import UserProfile from './components/UserProfile';
+import Layout from './components/Layout/Layout';
+import Auth from './pages/Auth';
+import UserProfile from './components/UserProfile/UserProfile';
+import HomePage from './pages/HomePage';
 
 function App() {
   const auth = useSelector(state => state.auth.isAuthenticated);
 
   return (
-    <>
-      <Header />
-      {!auth && <Auth />}
-      {auth && <UserProfile />}
-      {auth && <Counter />}
-    </>
+    <Layout>
+      <Switch>
+        <Route path='/' exact>
+          <HomePage isAuthenticated={auth} />
+        </Route>
+        <Route path='/auth'>
+          <Auth isAuthenticated={auth} />
+        </Route>
+        <Route path='/profile'>
+          <UserProfile isAuthenticated={auth} />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 

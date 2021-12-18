@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../store/auth';
+import { Link } from 'react-router-dom';
+import { authActions } from '../../store/auth';
 import classes from './Header.module.css';
 
 const Header = () => {
@@ -13,21 +14,19 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <h1>Redux Auth</h1>
-      {auth &&
-        <nav>
-          <ul>
-            <li>
-              <a href='#'>My Products</a>
-            </li>
-            <li>
-              <a href='#'>My Sales</a>
-            </li>
-            <li>
-              <button onClick={logoutHandler}>Logout</button>
-            </li>
-          </ul>
-        </nav>
-      }
+      <nav>
+        <ul>
+          <li>
+            <Link to='/auth'>Login</Link>
+          </li>
+          <li>
+            <Link to='/profile'>Profile</Link>
+          </li>
+          <li>
+            <button onclick={logoutHandler}>Logout</button>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };
